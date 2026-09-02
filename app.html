@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SpotBook – Find Your Spot. Book It.</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <header>
+            <h1>📍 <span>Spot</span>Book</h1>
+            <p>Find your perfect venue — hotels, event halls, restaurants, gardens &amp; more</p>
+        </header>
+
+        <!-- ===== STEP 1: SELECT VENUE TYPE & DATE ===== -->
+        <section class="step active" id="step1">
+            <h2><i class="fas fa-search"></i> Step 1: Find Your Spot</h2>
+            
+            <div class="form-group">
+                <label for="venueType">What kind of space are you looking for?</label>
+                <select id="venueType" onchange="onVenueTypeChange(this.value)">
+                    <option value="all">All Venues</option>
+                    <option value="hotel">🏨 Hotel</option>
+                    <option value="event_hall">🏛️ Event Hall</option>
+                    <option value="restaurant">🍽️ Restaurant</option>
+                    <option value="garden">🌿 Garden</option>
+                    <option value="lounge">🛋️ Lounge</option>
+                    <option value="conference">💼 Conference Center</option>
+                    <option value="wedding">💒 Wedding Venue</option>
+                </select>
+            </div>
+
+            <div id="venueDropdown" class="form-group">
+                <!-- Venues will be loaded here by JavaScript -->
+            </div>
+
+            <div class="form-group">
+                <label for="eventDate">Event Date:</label>
+                <input type="date" id="eventDate" />
+            </div>
+
+            <div class="form-group">
+                <label for="eventType">Event Type:</label>
+                <select id="eventType">
+                    <option value="wedding">Wedding</option>
+                    <option value="conference">Conference</option>
+                    <option value="party">Party</option>
+                    <option value="corporate">Corporate Event</option>
+                    <option value="dinner">Dinner</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <button onclick="goToStep(2)" class="btn primary">
+                <i class="fas fa-arrow-right"></i> Next
+            </button>
+        </section>
+
+        <!-- ===== STEP 2: SELECT VENUE & SEATING ===== -->
+        <section class="step" id="step2">
+            <h2><i class="fas fa-building"></i> Step 2: Select Your Venue</h2>
+            <div class="venue-grid" id="venueGrid">
+                <!-- Venues dynamically inserted by JavaScript -->
+            </div>
+
+            <div class="venue-detail" id="venueDetail">
+                <div id="seatingView" class="seating-view">
+                    <p style="color: #888;">Select a venue to view details and seating layout.</p>
+                </div>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button onclick="goToStep(1)" class="btn secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button onclick="goToStep(3)" class="btn primary" id="venueSelectedBtn">
+                    Select Venue &amp; Continue <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== STEP 3: ADD-ONS ===== -->
+        <section class="step" id="step3">
+            <h2><i class="fas fa-plus-circle"></i> Step 3: Add Extras</h2>
+            <p style="color: #aaa; margin-bottom: 20px;">Select what you need. If you choose "None", you can describe what you want below.</p>
+            
+            <div class="addon-grid">
+                <!-- Catering -->
+                <div class="addon-card" data-addon="catering">
+                    <span class="icon">🍽️</span>
+                    <h3>Catering</h3>
+                    <p>Select a package or describe your needs</p>
+                    <div class="addon-options">
+                        <label><input type="radio" name="catering" value="none" checked onchange="toggleAddonDescription('catering', this.value)" /> None</label>
+                        <label><input type="radio" name="catering" value="basic" onchange="toggleAddonDescription('catering', this.value)" /> Basic (N15,000)</label>
+                        <label><input type="radio" name="catering" value="premium" onchange="toggleAddonDescription('catering', this.value)" /> Premium (N25,000)</label>
+                        <label><input type="radio" name="catering" value="luxury" onchange="toggleAddonDescription('catering', this.value)" /> Luxury (N40,000)</label>
+                    </div>
+                    <div id="catering-description" style="margin-top: 10px; display: none;">
+                        <textarea placeholder="Describe your catering needs (e.g., menu, number of guests)..." style="width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 8px; min-height: 60px;"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Decor -->
+                <div class="addon-card" data-addon="decor">
+                    <span class="icon">🎨</span>
+                    <h3>Decor</h3>
+                    <p>Select a package or describe your theme</p>
+                    <div class="addon-options">
+                        <label><input type="radio" name="decor" value="none" checked onchange="toggleAddonDescription('decor', this.value)" /> None</label>
+                        <label><input type="radio" name="decor" value="basic" onchange="toggleAddonDescription('decor', this.value)" /> Basic (N10,000)</label>
+                        <label><input type="radio" name="decor" value="premium" onchange="toggleAddonDescription('decor', this.value)" /> Premium (N20,000)</label>
+                        <label><input type="radio" name="decor" value="luxury" onchange="toggleAddonDescription('decor', this.value)" /> Luxury (N35,000)</label>
+                    </div>
+                    <div id="decor-description" style="margin-top: 10px; display: none;">
+                        <textarea placeholder="Describe your decor needs (e.g., color theme, flowers)..." style="width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 8px; min-height: 60px;"></textarea>
+                    </div>
+                </div>
+                
+                <!-- Lodging -->
+                <div class="addon-card" data-addon="lodging">
+                    <span class="icon">🛏️</span>
+                    <h3>Lodging</h3>
+                    <p>Select a package or describe your needs</p>
+                    <div class="addon-options">
+                        <label><input type="radio" name="lodging" value="none" checked onchange="toggleAddonDescription('lodging', this.value)" /> None</label>
+                        <label><input type="radio" name="lodging" value="standard" onchange="toggleAddonDescription('lodging', this.value)" /> Standard (N30,000)</label>
+                        <label><input type="radio" name="lodging" value="deluxe" onchange="toggleAddonDescription('lodging', this.value)" /> Deluxe (N50,000)</label>
+                        <label><input type="radio" name="lodging" value="suite" onchange="toggleAddonDescription('lodging', this.value)" /> Suite (N80,000)</label>
+                    </div>
+                    <div id="lodging-description" style="margin-top: 10px; display: none;">
+                        <textarea placeholder="Describe your lodging needs (e.g., number of rooms)..." style="width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 8px; min-height: 60px;"></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Global Special Request -->
+            <div style="margin-top: 30px; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333;">
+                <h3 style="color: #fff; margin-bottom: 10px;">📝 Additional Notes</h3>
+                <p style="color: #888; font-size: 0.9rem; margin-bottom: 10px;">Any other special requests?</p>
+                <textarea id="globalSpecialRequest" placeholder="e.g., Dietary restrictions, access needs, etc." style="width: 100%; padding: 10px; background: #0a0a0a; border: 1px solid #333; color: #fff; border-radius: 8px; min-height: 80px;"></textarea>
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button onclick="goToStep(2)" class="btn secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button onclick="goToStep(4)" class="btn primary">
+                    Review Booking <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- ===== STEP 4: SUMMARY ===== -->
+        <section class="step" id="step4">
+            <h2><i class="fas fa-file-invoice"></i> Step 4: Review &amp; Book</h2>
+            <div id="bookingSummary" class="booking-summary">
+                <p style="color: #888;">Please complete all steps to see your summary.</p>
+            </div>
+            <div style="margin-top: 20px; background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #333;">
+                <h3 style="color: #fff;">💰 Payment Summary</h3>
+                <p><strong>Total:</strong> <span id="totalAmount" style="color: #f5a623;">N0</span></p>
+                <p><strong>Deposit (50%):</strong> <span id="depositAmount" style="color: #f5a623;">N0</span></p>
+                <p style="font-size: 0.8rem; color: #888;">* Deposit confirms your booking. Balance due on event day.</p>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button onclick="goToStep(3)" class="btn secondary">
+                    <i class="fas fa-arrow-left"></i> Back
+                </button>
+                <button onclick="confirmBooking()" class="btn primary">
+                    <i class="fas fa-check"></i> Confirm &amp; Pay Deposit
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <!-- ===== INVOICE MODAL ===== -->
+    <div id="invoiceModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span onclick="closeModal()" style="float: right; cursor: pointer; font-size: 1.5rem; color: #fff;">&times;</span>
+            <h2 style="color: #f5a623;">📄 Booking Confirmation</h2>
+            <div id="invoiceContent"></div>
+            <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
+                <button onclick="printInvoice()" class="btn primary"><i class="fas fa-print"></i> Print</button>
+                <button onclick="sendReminder()" class="btn secondary"><i class="fas fa-bell"></i> Send Reminder</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+</html>
