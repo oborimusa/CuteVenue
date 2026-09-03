@@ -119,6 +119,40 @@
             padding: 14px;
             font-size: 1rem;
         }
+
+        /* Footer styles */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-bottom: 5px;
+        }
+
+        .footer .links {
+            font-size: 0.75rem;
+        }
+
+        .footer .links .middot {
+            margin: 0 5px;
+            color: #444;
+        }
+
         @media (max-width: 768px) {
             .contact-container h1 {
                 font-size: 2rem;
@@ -214,17 +248,21 @@
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer>
-            <p>© 2026 <span style="color: #ff6b6b;">CuteVenue</span> — Built for Nigeria's event industry.</p>
-            <p style="font-size: 0.8rem; margin-top: 5px;">
-                <a href="/" style="color: #666; text-decoration: none;">Home</a> &middot;
-                <a href="/pricing.html" style="color: #666; text-decoration: none;">Pricing</a> &middot;
-                <a href="/privacy-policy.html" style="color: #666; text-decoration: none;">Privacy</a> &middot;
-                <a href="/terms-conditions.html" style="color: #666; text-decoration: none;">Terms</a> &middot;
-                <a href="/contact.html" style="color: #666; text-decoration: none;">Contact</a>
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <p class="copyright">© 2026 <a href="/">CuteVenue</a> — Built for Nigeria's event industry. 🇳🇬</p>
+            <p class="links">
+                <a href="/">Home</a>
+                <span class="middot">&middot;</span>
+                <a href="/pricing.html">Pricing</a>
+                <span class="middot">&middot;</span>
+                <a href="/privacy-policy.html">Privacy</a>
+                <span class="middot">&middot;</span>
+                <a href="/terms-conditions.html">Terms</a>
+                <span class="middot">&middot;</span>
+                <a href="/contact.html">Contact</a>
             </p>
-        </footer>
+        </div>
     </div>
 
     <!-- Floating WhatsApp Button -->
