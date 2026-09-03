@@ -327,19 +327,22 @@
             <h3>🚀 Be the First to Know</h3>
             <p>We're launching soon. Register your interest as a venue owner or event planner.</p>
 
-            <form id="interestForm" onsubmit="handleSubmit(event)">
-                <div class="form-group">
-                    <input type="text" placeholder="Your Name" required />
-                    <input type="email" placeholder="Your Email" required />
-                    <select required>
-                        <option value="">I am a...</option>
-                        <option value="venue_owner">Event Hall Owner</option>
-                        <option value="event_planner">Event Planner</option>
-                        <option value="both">Both</option>
-                    </select>
-                    <button type="submit"><i class="fas fa-paper-plane"></i> Register Interest</button>
-                </div>
-            </form>
+            <form name="interest" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+    <input type="hidden" name="form-name" value="interest" />
+    <input type="hidden" name="bot-field" />
+    
+    <div class="form-group">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <select name="role" required>
+            <option value="">I am a...</option>
+            <option value="venue_owner">Event Hall Owner</option>
+            <option value="event_planner">Event Planner</option>
+            <option value="both">Both</option>
+        </select>
+        <button type="submit">Register Interest</button>
+    </div>
+</form>
             <p class="form-note">
                 <i class="fas fa-lock" style="margin-right: 5px;"></i>
                 No spam. Unsubscribe anytime. We'll only email you about the launch.
