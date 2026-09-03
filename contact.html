@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Us — CuteVenue</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        .contact-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .contact-container h1 {
+            font-size: 2.8rem;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+        .contact-container h1 span {
+            color: #ff6b6b;
+        }
+        .contact-container .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+        .contact-card {
+            background: #1a1a1a;
+            padding: 25px 20px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        .contact-card:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-4px);
+        }
+        .contact-card .icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .contact-card h3 {
+            color: #fff;
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .contact-card p {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+        .contact-card a {
+            color: #ff6b6b;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-card a:hover {
+            text-decoration: underline;
+        }
+        .contact-form-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+        }
+        .contact-form-section h2 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        .contact-form-section p {
+            color: #888;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+        }
+        .contact-form-section .form-group {
+            margin-bottom: 15px;
+        }
+        .contact-form-section .form-group label {
+            display: block;
+            color: #aaa;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        .contact-form-section .form-group input,
+        .contact-form-section .form-group textarea,
+        .contact-form-section .form-group select {
+            width: 100%;
+            padding: 12px 14px;
+            background: #0a0a0a;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        .contact-form-section .form-group input:focus,
+        .contact-form-section .form-group textarea:focus,
+        .contact-form-section .form-group select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+        .contact-form-section .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        .contact-form-section .btn {
+            width: 100%;
+            padding: 14px;
+            font-size: 1rem;
+        }
+        @media (max-width: 768px) {
+            .contact-container h1 {
+                font-size: 2rem;
+            }
+            .contact-form-section .form-row {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>📍 <span>Cute</span>Venue</h1>
+            <p>Get in touch with us</p>
+        </header>
+
+        <div class="contact-container">
+            <h1>Contact <span>Us</span></h1>
+            <p class="subtitle">We'd love to hear from you. Reach out anytime.</p>
+
+            <!-- Contact Cards -->
+            <div class="contact-grid">
+                <div class="contact-card">
+                    <span class="icon">📞</span>
+                    <h3>Phone</h3>
+                    <p>Call us directly</p>
+                    <a href="tel:+2348039661354">+234 803 966 1354</a>
+                </div>
+                <div class="contact-card">
+                    <span class="icon">✉️</span>
+                    <h3>Email</h3>
+                    <p>Send us a message</p>
+                    <a href="mailto:info@cutevenue.com">info@cutevenue.com</a>
+                </div>
+                <div class="contact-card">
+                    <span class="icon">💬</span>
+                    <h3>WhatsApp</h3>
+                    <p>Fastest response</p>
+                    <a href="https://wa.me/2348039661354">Chat Now</a>
+                </div>
+                <div class="contact-card">
+                    <span class="icon">📍</span>
+                    <h3>Location</h3>
+                    <p>Remote-first</p>
+                    <p style="color: #666; font-size: 0.85rem;">Serving Nigeria nationwide</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form-section">
+                <h2>Send a Message</h2>
+                <p>Fill this out and we'll reach out within 24 hours.</p>
+                <form name="contact" method="POST" data-netlify="true">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Your Name *</label>
+                            <input type="text" id="name" name="name" placeholder="e.g., John Doe" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Your Email *</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" placeholder="0803 966 1354" />
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject</option>
+                            <option value="booking">Booking Inquiry</option>
+                            <option value="venue_listing">List My Venue</option>
+                            <option value="support">Technical Support</option>
+                            <option value="partnership">Partnership</option>
+                            <option value="feedback">Feedback</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" rows="5" placeholder="Tell us how we can help..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn primary">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <p>© 2026 <span style="color: #ff6b6b;">CuteVenue</span> — Built for Nigeria's event industry.</p>
+            <p style="font-size: 0.8rem; margin-top: 5px;">
+                <a href="/" style="color: #666; text-decoration: none;">Home</a> &middot;
+                <a href="/pricing.html" style="color: #666; text-decoration: none;">Pricing</a> &middot;
+                <a href="/privacy-policy.html" style="color: #666; text-decoration: none;">Privacy</a> &middot;
+                <a href="/terms-conditions.html" style="color: #666; text-decoration: none;">Terms</a> &middot;
+                <a href="/contact.html" style="color: #666; text-decoration: none;">Contact</a>
+            </p>
+        </footer>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       style="position: fixed; bottom: 30px; right: 30px; background: #25D366; color: #fff; width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 35px; box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); z-index: 9999; text-decoration: none; transition: all 0.3s ease; border: none;"
+       onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 12px 35px rgba(37, 211, 102, 0.6)';"
+       onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 25px rgba(37, 211, 102, 0.4)';">
+       <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

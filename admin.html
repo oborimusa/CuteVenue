@@ -127,6 +127,39 @@
         .refresh-note i {
             color: #ff6b6b;
         }
+
+        /* Footer styles */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-bottom: 5px;
+        }
+
+        .footer .links {
+            font-size: 0.75rem;
+        }
+
+        .footer .links .middot {
+            margin: 0 5px;
+            color: #444;
+        }
     </style>
 </head>
 <body>
@@ -195,6 +228,22 @@
         <div class="refresh-note">
             <i class="fas fa-database"></i> Data syncs from Firebase automatically.
             Last updated: <span id="lastUpdated">Just now</span>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <p class="copyright">© 2026 <a href="/">CuteVenue</a> — Built for Nigeria's event industry. 🇳🇬</p>
+            <p class="links">
+                <a href="/">Home</a>
+                <span class="middot">&middot;</span>
+                <a href="/pricing.html">Pricing</a>
+                <span class="middot">&middot;</span>
+                <a href="/privacy-policy.html">Privacy</a>
+                <span class="middot">&middot;</span>
+                <a href="/terms-conditions.html">Terms</a>
+                <span class="middot">&middot;</span>
+                <a href="/contact.html">Contact</a>
+            </p>
         </div>
     </div>
 
@@ -414,7 +463,5 @@
 
         console.log("📍 CuteVenue Admin Dashboard loaded successfully!");
     </script>
-    <script type="module" src="script.js"></script>
-    
 </body>
 </html>

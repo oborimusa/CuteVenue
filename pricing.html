@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CuteVenue — Pricing for Event Hall Owners</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- PRICING PAGE SPECIFIC STYLES ----- */
+        .pricing-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .pricing-header {
+            text-align: center;
+            padding: 40px 20px 30px;
+        }
+
+        .pricing-header h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .pricing-header h1 span {
+            color: #ff6b6b;
+        }
+
+        .pricing-header p {
+            color: #aaa;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            padding: 30px 0;
+        }
+
+        .pricing-card {
+            background: #1a1a1a;
+            padding: 35px 25px;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .pricing-card.popular {
+            border-color: #ff6b6b;
+            background: #1a0a0a;
+        }
+
+        .pricing-card.popular .popular-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #0a0a0a;
+            padding: 4px 16px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card h3 {
+            color: #fff;
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+        }
+
+        .pricing-card .subtitle {
+            color: #888;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .pricing-card .price {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #ff6b6b;
+            margin: 15px 0;
+        }
+
+        .pricing-card .price small {
+            font-size: 1rem;
+            color: #888;
+            font-weight: 400;
+        }
+
+        .pricing-card .features {
+            list-style: none;
+            text-align: left;
+            margin: 20px 0;
+            padding: 0;
+        }
+
+        .pricing-card .features li {
+            padding: 10px 0;
+            color: #ccc;
+            border-bottom: 1px solid #222;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .pricing-card .features li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card .features li i {
+            color: #ff6b6b;
+            width: 20px;
+            text-align: center;
+        }
+
+        .pricing-card .features li .fa-times {
+            color: #444;
+        }
+
+        .pricing-card .btn {
+            width: 100%;
+            margin-top: 10px;
+            padding: 14px;
+        }
+
+        .pricing-card .btn-outline {
+            background: transparent;
+            color: #ff6b6b;
+            border: 2px solid #ff6b6b;
+        }
+
+        .pricing-card .btn-outline:hover {
+            background: #ff6b6b;
+            color: #0a0a0a;
+        }
+
+        .payment-flow {
+            background: #111;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            margin: 30px 0;
+        }
+
+        .payment-flow h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .payment-flow h2 span {
+            color: #ff6b6b;
+        }
+
+        .flow-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .flow-step {
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #2a2a2a;
+            text-align: center;
+        }
+
+        .flow-step .step-number {
+            display: inline-block;
+            background: #ff6b6b;
+            color: #0a0a0a;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            line-height: 40px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .flow-step h4 {
+            color: #fff;
+            margin-bottom: 5px;
+        }
+
+        .flow-step p {
+            color: #888;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        .faq-section {
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 16px;
+            border: 1px solid #2a2a2a;
+            margin: 40px 0;
+        }
+
+        .faq-section h2 {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 25px;
+        }
+
+        .faq-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #222;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-item h4 {
+            color: #fff;
+            font-size: 1.05rem;
+            margin-bottom: 5px;
+        }
+
+        .faq-item p {
+            color: #aaa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .cta-banner {
+            background: linear-gradient(135deg, #1a0a0a, #0a0a0a);
+            border: 2px solid #ff6b6b;
+            border-radius: 16px;
+            padding: 40px 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .cta-banner h2 {
+            color: #fff;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .cta-banner p {
+            color: #aaa;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        /* Footer styles */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-bottom: 5px;
+        }
+
+        .footer .links {
+            font-size: 0.75rem;
+        }
+
+        .footer .links .middot {
+            margin: 0 5px;
+            color: #444;
+        }
+
+        @media (max-width: 768px) {
+            .pricing-header h1 {
+                font-size: 2rem;
+            }
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+            .pricing-card .price {
+                font-size: 2.2rem;
+            }
+            .flow-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ===== HEADER ===== -->
+        <header>
+            <h1>📍 <span>Cute</span>Venue</h1>
+            <p>List your event hall and start getting bookings</p>
+        </header>
+
+        <!-- ===== PRICING CONTENT ===== -->
+        <div class="pricing-container">
+            
+            <!-- Header -->
+            <div class="pricing-header">
+                <h1>Simple, <span>Transparent</span> Pricing</h1>
+                <p>No hidden fees. No surprises. You only pay when you get booked.</p>
+            </div>
+
+            <!-- ===== PAYMENT FLOW EXPLANATION ===== -->
+            <div class="payment-flow">
+                <h2>🔒 How <span>Payments</span> Work</h2>
+                <p style="text-align: center; color: #888; margin-bottom: 20px;">We use a secure escrow system to protect both you and your customers.</p>
+                <div class="flow-steps">
+                    <div class="flow-step">
+                        <div class="step-number">1</div>
+                        <h4>Customer Books</h4>
+                        <p>Customer pays <strong>50% deposit</strong> to secure the date</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">2</div>
+                        <h4>Event Day</h4>
+                        <p>Customer pays <strong>remaining 50%</strong> before the event starts</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">3</div>
+                        <h4>Funds Held</h4>
+                        <p>All payments are held securely by Paystack/Flutterwave</p>
+                    </div>
+                    <div class="flow-step">
+                        <div class="step-number">4</div>
+                        <h4>You Get Paid</h4>
+                        <p>Full payment released to you <strong>2-7 days after</strong> successful event</p>
+                    </div>
+                </div>
+                <p style="text-align: center; color: #666; font-size: 0.85rem; margin-top: 15px;">
+                    <i class="fas fa-shield-alt" style="color: #ff6b6b;"></i>
+                    Your payment is guaranteed. No chasing customers. No disputes.
+                </p>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="pricing-grid">
+                
+                <!-- Free Plan -->
+                <div class="pricing-card">
+                    <span class="icon">📋</span>
+                    <h3>Free</h3>
+                    <div class="subtitle">Perfect to get started</div>
+                    <div class="price">N0 <small>/ month</small></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> List your hall</li>
+                        <li><i class="fas fa-check"></i> Basic profile with photos</li>
+                        <li><i class="fas fa-check"></i> Receive booking inquiries</li>
+                        <li><i class="fas fa-check"></i> WhatsApp support</li>
+                        <li><i class="fas fa-times" style="color: #444;"></i> 10% commission per booking</li>
+                        <li><i class="fas fa-times" style="color: #444;"></i> Featured listing</li>
+                        <li><i class="fas fa-times" style="color: #444;"></i> Analytics dashboard</li>
+                        <li><i class="fas fa-check" style="color: #ff6b6b;"></i> <strong>Escrow protection</strong></li>
+                    </ul>
+                    <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue%2C%20I%20want%20to%20list%20my%20event%20hall%20on%20the%20Free%20plan" 
+                       class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> List for Free
+                    </a>
+                </div>
+
+                <!-- Pro Plan (Popular) -->
+                <div class="pricing-card popular">
+                    <span class="popular-badge">🔥 Most Popular</span>
+                    <span class="icon">🚀</span>
+                    <h3>Pro</h3>
+                    <div class="subtitle">Get more visibility</div>
+                    <div class="price">N25,000 <small>/ year</small></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Everything in Free</li>
+                        <li><i class="fas fa-check"></i> <strong>Zero commission</strong> per booking</li>
+                        <li><i class="fas fa-check"></i> Featured listing (highlighted)</li>
+                        <li><i class="fas fa-check"></i> Priority in search results</li>
+                        <li><i class="fas fa-check"></i> Full analytics dashboard</li>
+                        <li><i class="fas fa-check"></i> 24/7 priority support</li>
+                        <li><i class="fas fa-check"></i> Social media promotion</li>
+                        <li><i class="fas fa-check" style="color: #ff6b6b;"></i> <strong>Escrow protection</strong></li>
+                    </ul>
+                    <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue%2C%20I%20want%20to%20upgrade%20to%20the%20Pro%20plan" 
+                       class="btn primary" style="display: block; text-align: center; text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> Upgrade to Pro
+                    </a>
+                </div>
+
+                <!-- Premium Plan -->
+                <div class="pricing-card">
+                    <span class="icon">👑</span>
+                    <h3>Premium</h3>
+                    <div class="subtitle">For large venues and chains</div>
+                    <div class="price">N50,000 <small>/ year</small></div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i> Everything in Pro</li>
+                        <li><i class="fas fa-check"></i> <strong>Zero commission</strong> per booking</li>
+                        <li><i class="fas fa-check"></i> Premium featured listing</li>
+                        <li><i class="fas fa-check"></i> Customizable profile page</li>
+                        <li><i class="fas fa-check"></i> Multiple user accounts</li>
+                        <li><i class="fas fa-check"></i> Dedicated account manager</li>
+                        <li><i class="fas fa-check"></i> Custom branding &amp; URL</li>
+                        <li><i class="fas fa-check"></i> Export booking reports</li>
+                        <li><i class="fas fa-check" style="color: #ff6b6b;"></i> <strong>Escrow protection</strong></li>
+                    </ul>
+                    <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue%2C%20I%20want%20to%20upgrade%20to%20the%20Premium%20plan" 
+                       class="btn btn-outline" style="display: block; text-align: center; text-decoration: none;">
+                        <i class="fab fa-whatsapp"></i> Go Premium
+                    </a>
+                </div>
+
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>❓ Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <h4>How does the commission work on the Free plan?</h4>
+                    <p>When a customer books your hall through CuteVenue, we take a 10% commission on the booking total. You receive the remaining 90% after the event.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Why do I get paid after the event?</h4>
+                    <p>We use an escrow system to protect both you and the customer. The customer pays upfront, but the money is held securely until the event is successfully delivered. This prevents disputes and ensures both parties are satisfied.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I upgrade from Free to Pro later?</h4>
+                    <p>Absolutely! You can upgrade at any time. Your hall will instantly become a featured listing with zero commission.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How do I get paid?</h4>
+                    <p>We integrate with Paystack and Flutterwave. Once the event is confirmed as successful, your payment is released directly to your bank account within 2-7 business days.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What happens if a customer cancels?</h4>
+                    <p>If a customer cancels within 48 hours of the event, you keep the deposit. If they cancel earlier, the deposit is refunded to the customer. This protects your time and availability.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Is there a contract or lock-in period?</h4>
+                    <p>No. You can cancel or downgrade anytime. We believe if we don't deliver value, you should be able to leave without any penalty.</p>
+                </div>
+            </div>
+
+            <!-- CTA Banner -->
+            <div class="cta-banner">
+                <h2>Ready to <span style="color: #ff6b6b;">list your hall</span>?</h2>
+                <p>Join other event hall owners who are getting more bookings through CuteVenue.</p>
+                <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue%2C%20I%20want%20to%20list%20my%20event%20hall" 
+                   class="btn primary" style="text-decoration: none; display: inline-block;">
+                    <i class="fab fa-whatsapp"></i> List Your Hall Now
+                </a>
+            </div>
+
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div class="footer">
+            <p class="copyright">© 2026 <a href="/">CuteVenue</a> — Built for Nigeria's event industry. 🇳🇬</p>
+            <p class="links">
+                <a href="/">Home</a>
+                <span class="middot">&middot;</span>
+                <a href="/pricing.html">Pricing</a>
+                <span class="middot">&middot;</span>
+                <a href="/privacy-policy.html">Privacy</a>
+                <span class="middot">&middot;</span>
+                <a href="/terms-conditions.html">Terms</a>
+                <span class="middot">&middot;</span>
+                <a href="/contact.html">Contact</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- ===== FLOATING WHATSAPP BUTTON ===== -->
+    <a href="https://wa.me/2348039661354?text=Hi%20CuteVenue%2C%20I%20want%20to%20book%20an%20event%20hall" 
+       target="_blank" 
+       rel="noopener noreferrer"
+       style="
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: #fff;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            z-index: 9999;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+        "
+        onmouseover="this.style.transform='scale(1.1)'; this.style.boxShadow='0 12px 35px rgba(37, 211, 102, 0.6)';"
+        onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 8px 25px rgba(37, 211, 102, 0.4)';"
+        aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</body>
+</html>

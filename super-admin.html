@@ -273,6 +273,39 @@
             border-color: #ff6b6b;
         }
 
+        /* ----- FOOTER ----- */
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+            text-align: center;
+            color: #666;
+            font-size: 0.85rem;
+        }
+
+        .footer a {
+            color: #666;
+            text-decoration: none;
+        }
+
+        .footer a:hover {
+            color: #ff6b6b;
+            text-decoration: underline;
+        }
+
+        .footer .copyright {
+            margin-bottom: 5px;
+        }
+
+        .footer .links {
+            font-size: 0.75rem;
+        }
+
+        .footer .links .middot {
+            margin: 0 5px;
+            color: #444;
+        }
+
         /* ----- RESPONSIVE ----- */
         @media (max-width: 768px) {
             .admin-header {
@@ -307,20 +340,20 @@
 <body>
     <div class="super-container">
         <!-- ===== HEADER ===== -->
-       <div class="admin-header">
-    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
-        <h1 style="font-size: 2rem; font-weight: 800; margin: 0;">
-            📍 <span style="color: #ff6b6b;">Cute</span>Venue
-            <span style="font-size: 0.8rem; color: #888; font-weight: 400;">Super Admin</span>
-        </h1>
-        <a href="/" style="color: #888; text-decoration: none; font-size: 0.9rem; padding: 6px 14px; border: 1px solid #333; border-radius: 20px; transition: all 0.3s ease;">
-            <i class="fas fa-home"></i> Home
-        </a>
-    </div>
-    <div class="user-badge">
-        <i class="fas fa-shield-alt"></i> Super Admin · <span id="adminEmail">admin@cutevenue.com</span>
-    </div>
-</div>
+        <div class="admin-header">
+            <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                <h1 style="font-size: 2rem; font-weight: 800; margin: 0;">
+                    📍 <span style="color: #ff6b6b;">Cute</span>Venue
+                    <span style="font-size: 0.8rem; color: #888; font-weight: 400;">Super Admin</span>
+                </h1>
+                <a href="/" style="color: #888; text-decoration: none; font-size: 0.9rem; padding: 6px 14px; border: 1px solid #333; border-radius: 20px; transition: all 0.3s ease;">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+            <div class="user-badge">
+                <i class="fas fa-shield-alt"></i> Super Admin · <span id="adminEmail">admin@cutevenue.com</span>
+            </div>
+        </div>
 
         <!-- ===== STATS ===== -->
         <div class="stats-grid" id="statsGrid">
@@ -526,11 +559,22 @@
         </div>
 
         <!-- ===== FOOTER ===== -->
-        <div style="text-align: center; padding: 30px 0 10px; color: #666; font-size: 0.85rem; border-top: 1px solid #2a2a2a; margin-top: 30px;">
-            <p>© 2026 <span style="color: #ff6b6b;">CuteVenue</span> Super Admin — Built for Nigeria's event industry.</p>
-            <p style="font-size: 0.75rem; margin-top: 5px;">
+        <div class="footer">
+            <p class="copyright">© 2026 <a href="/">CuteVenue</a> Super Admin — Built for Nigeria's event industry. 🇳🇬</p>
+            <p class="links">
+                <a href="/">Home</a>
+                <span class="middot">&middot;</span>
+                <a href="/pricing.html">Pricing</a>
+                <span class="middot">&middot;</span>
+                <a href="/privacy-policy.html">Privacy</a>
+                <span class="middot">&middot;</span>
+                <a href="/terms-conditions.html">Terms</a>
+                <span class="middot">&middot;</span>
+                <a href="/contact.html">Contact</a>
+            </p>
+            <p style="font-size: 0.7rem; color: #555; margin-top: 10px;">
                 <i class="fas fa-database"></i> Data syncs from Firebase.
-                <span id="lastUpdated" style="color: #888;">Last updated: Just now</span>
+                <span id="lastUpdated" style="color: #666;">Last updated: Just now</span>
             </p>
         </div>
     </div>
@@ -640,7 +684,6 @@
         // ----- USERS -----
         async function loadUsers() {
             try {
-                // Simulated users (Firebase Auth users are separate)
                 allUsers = [
                     { id: 'user1', name: 'Admin User', email: 'admin@cutevenue.com', role: 'super_admin', venues: 0, joined: '2026-01-01' },
                     { id: 'user2', name: 'John Doe', email: 'john@eventhall.com', role: 'venue_owner', venues: 2, joined: '2026-02-15' },
@@ -672,7 +715,6 @@
                 if (b.status === 'pending') pendingBookings++;
             });
 
-            // Commission (10% of revenue)
             const commission = totalRevenue * 0.1;
 
             document.getElementById('totalVenues').textContent = totalVenues;
@@ -905,7 +947,6 @@
         // ============================================================
 
         function setupRealtimeListeners() {
-            // Venues listener
             onSnapshot(collection(db, "venues"), (snapshot) => {
                 allVenues = [];
                 snapshot.forEach((doc) => {
@@ -916,7 +957,6 @@
                 document.getElementById('lastUpdated').textContent = `Last updated: ${new Date().toLocaleTimeString()}`;
             });
 
-            // Bookings listener
             const q = query(collection(db, "bookings"), orderBy("createdAt", "desc"));
             onSnapshot(q, (snapshot) => {
                 allBookings = [];
@@ -932,7 +972,6 @@
         // INIT
         // ============================================================
 
-        // Expose functions to global scope for onclick handlers
         window.addVenue = window.addVenue;
         window.viewVenue = window.viewVenue;
         window.editVenue = window.editVenue;
@@ -945,14 +984,10 @@
         window.saveSettings = window.saveSettings;
         window.loadAllData = loadAllData;
 
-        // Load data
         loadAllData();
-
-        // Setup realtime listeners
         setupRealtimeListeners();
 
         console.log("📍 CuteVenue Super Admin loaded successfully!");
     </script>
-    <script type="module" src="script.js"></script>
 </body>
 </html>
