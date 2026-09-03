@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CuteVenue – Coming Soon</title>
+    <title>CuteVenue – Find the Perfect Event Hall</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
     <style>
         * {
@@ -33,7 +33,6 @@
             text-align: center;
         }
 
-        /* ===== LOGO ===== */
         .logo {
             font-size: 2.8rem;
             font-weight: 800;
@@ -51,7 +50,6 @@
             margin-bottom: 30px;
         }
 
-        /* ===== BADGE ===== */
         .badge {
             display: inline-block;
             background: #2a2a2a;
@@ -66,7 +64,6 @@
             margin-bottom: 20px;
         }
 
-        /* ===== HEADLINE ===== */
         h1 {
             font-size: 2.8rem;
             font-weight: 800;
@@ -86,7 +83,6 @@
             line-height: 1.6;
         }
 
-        /* ===== FEATURES ===== */
         .feature-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -124,7 +120,6 @@
             font-size: 0.85rem;
         }
 
-        /* ===== FORM ===== */
         .form-section {
             background: #1a1a1a;
             padding: 30px;
@@ -194,7 +189,6 @@
             margin-top: 15px;
         }
 
-        /* ===== SOCIAL PROOF ===== */
         .social-proof {
             display: flex;
             flex-wrap: wrap;
@@ -221,7 +215,6 @@
             color: #888;
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             margin-top: 30px;
             color: #666;
@@ -237,7 +230,6 @@
             text-decoration: underline;
         }
 
-        /* ===== RESPONSIVE ===== */
         @media (max-width: 768px) {
             .container {
                 padding: 30px 20px;
@@ -276,7 +268,7 @@
     <div class="container">
         <!-- ===== LOGO ===== -->
         <div class="logo">Cute<span>Venue</span></div>
-        <div class="tagline">Find your perfect spot. Book it.</div>
+        <div class="tagline">Find the perfect event hall. Book it.</div>
 
         <!-- ===== BADGE ===== -->
         <div class="badge">
@@ -284,33 +276,33 @@
         </div>
 
         <!-- ===== HEADLINE ===== -->
-        <h1>Nigeria's <span>Smartest</span> Venue Booking Platform</h1>
+        <h1>Nigeria's <span>Smartest</span> Event Hall Platform</h1>
         <p class="sub-headline">
-            Discover and book hotels, event halls, restaurants, gardens, and lounges — all in one place.
-            <br />We connect you with the perfect spot for your event.
+            Discover and book the best event halls, wedding venues, and conference spaces across Nigeria.
+            <br />We connect you with the perfect space for your special occasion.
         </p>
 
         <!-- ===== FEATURES ===== -->
         <div class="feature-grid">
-            <div class="feature-card">
-                <span class="icon">🏨</span>
-                <h4>Hotels &amp; Lodging</h4>
-                <p>Find the perfect stay for you and your guests</p>
-            </div>
             <div class="feature-card">
                 <span class="icon">🏛️</span>
                 <h4>Event Halls</h4>
                 <p>Book halls for weddings, conferences, and parties</p>
             </div>
             <div class="feature-card">
-                <span class="icon">🍽️</span>
-                <h4>Restaurants &amp; Lounges</h4>
-                <p>Discover the best spots for dining and relaxation</p>
+                <span class="icon">💒</span>
+                <h4>Wedding Venues</h4>
+                <p>Beautiful spaces for your special day</p>
             </div>
             <div class="feature-card">
-                <span class="icon">🌿</span>
-                <h4>Gardens &amp; Outdoor</h4>
-                <p>Beautiful outdoor venues for your special occasions</p>
+                <span class="icon">🎨</span>
+                <h4>Decor &amp; Catering</h4>
+                <p>Add-ons to make your event perfect</p>
+            </div>
+            <div class="feature-card">
+                <span class="icon">🪑</span>
+                <h4>Seating Layouts</h4>
+                <p>Interactive 3D seating plans for your guests</p>
             </div>
         </div>
 
@@ -318,7 +310,7 @@
         <div class="social-proof">
             <div class="stat">
                 <div class="number">30+</div>
-                <div class="label">Venues Onboarded</div>
+                <div class="label">Event Halls Onboarded</div>
             </div>
             <div class="stat">
                 <div class="number">5</div>
@@ -341,7 +333,7 @@
                     <input type="email" placeholder="Your Email" required />
                     <select required>
                         <option value="">I am a...</option>
-                        <option value="venue_owner">Venue Owner</option>
+                        <option value="venue_owner">Event Hall Owner</option>
                         <option value="event_planner">Event Planner</option>
                         <option value="both">Both</option>
                     </select>
@@ -356,7 +348,7 @@
 
         <!-- ===== FOOTER ===== -->
         <div class="footer">
-            <p>© 2026 <a href="#">CuteVenue</a> — Built for Nigerian hospitality. 🇳🇬</p>
+            <p>© 2026 <a href="#">CuteVenue</a> — Built for Nigeria's event industry. 🇳🇬</p>
             <p style="margin-top: 5px; font-size: 0.75rem;">
                 <a href="#">Privacy Policy</a> &middot;
                 <a href="#">Terms of Service</a>
@@ -368,8 +360,8 @@
         function handleSubmit(e) {
             e.preventDefault();
             alert('✅ Thank you! We\'ll notify you when CuteVenue launches.');
-            // You can integrate with EmailJS, Firebase, or a simple Netlify form here
         }
     </script>
+    <script type="module" src="script.js"></script>
 </body>
 </html>

@@ -1,62 +1,420 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin - Hotel Booking</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CuteVenue — Admin Dashboard</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* Additional admin-specific styles */
+        .stat-card {
+            background: #1a1a1a;
+            padding: 25px 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid #2a2a2a;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            border-color: #ff6b6b;
+            transform: translateY(-4px);
+        }
+
+        .stat-card h3 {
+            color: #888;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .stat-card .number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: #ff6b6b;
+        }
+
+        .stat-card .sub {
+            color: #666;
+            font-size: 0.8rem;
+            margin-top: 5px;
+        }
+
+        .bookings-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 15px;
+        }
+
+        .bookings-table th {
+            text-align: left;
+            padding: 12px 10px;
+            color: #888;
+            font-weight: 600;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #2a2a2a;
+        }
+
+        .bookings-table td {
+            padding: 12px 10px;
+            border-bottom: 1px solid #222;
+            color: #ddd;
+            font-size: 0.9rem;
+        }
+
+        .bookings-table tr:hover td {
+            background: #1a1a1a;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-badge.confirmed {
+            background: #0a2a1a;
+            color: #00b894;
+        }
+
+        .status-badge.pending {
+            background: #2a1a0a;
+            color: #f5a623;
+        }
+
+        .status-badge.cancelled {
+            background: #2a0a0a;
+            color: #ff4444;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            padding: 5px 8px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: #ff6b6b;
+            background: #2a0a0a;
+        }
+
+        .admin-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #2a2a2a;
+        }
+
+        .refresh-note {
+            color: #666;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .refresh-note i {
+            color: #ff6b6b;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
+        <!-- ===== HEADER ===== -->
         <header>
-            <h1>👑 Admin Dashboard</h1>
-            <p>Manage bookings, availability, and reminders</p>
+            <h1>📍 <span>Cute</span>Venue</h1>
+            <p>👑 Admin Dashboard — Manage event halls, bookings &amp; reminders</p>
         </header>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; text-align: center;">
-                <h3>📅 Bookings</h3>
-                <p style="font-size: 2rem; font-weight: 800; color: #f5a623;" id="bookingCount">0</p>
+        <!-- ===== STATS ===== -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; margin: 30px 0;">
+            <div class="stat-card">
+                <h3>📅 Total Bookings</h3>
+                <div class="number" id="bookingCount">0</div>
+                <div class="sub">All time</div>
             </div>
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; text-align: center;">
+            <div class="stat-card">
                 <h3>💰 Revenue</h3>
-                <p style="font-size: 2rem; font-weight: 800; color: #f5a623;" id="revenueTotal">N0</p>
+                <div class="number" id="revenueTotal">N0</div>
+                <div class="sub">From confirmed bookings</div>
             </div>
-            <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; text-align: center;">
-                <h3>📊 Occupancy</h3>
-                <p style="font-size: 2rem; font-weight: 800; color: #f5a623;" id="occupancyRate">0%</p>
+            <div class="stat-card">
+                <h3>🏛️ Active Halls</h3>
+                <div class="number" id="venueCount">0</div>
+                <div class="sub">Listed on platform</div>
+            </div>
+            <div class="stat-card">
+                <h3>📊 Occupancy Rate</h3>
+                <div class="number" id="occupancyRate">0%</div>
+                <div class="sub">Average across halls</div>
             </div>
         </div>
 
-        <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #222;">
-            <h3 style="color: #fff; margin-bottom: 15px;">📋 Recent Bookings</h3>
+        <!-- ===== RECENT BOOKINGS ===== -->
+        <div style="background: #1a1a1a; padding: 20px; border-radius: 12px; border: 1px solid #2a2a2a;">
+            <h3 style="color: #fff; margin-bottom: 15px;">
+                📋 Recent Bookings
+                <span style="color: #666; font-size: 0.8rem; font-weight: 400; margin-left: 10px;">
+                    <i class="fas fa-sync" id="refreshIcon" onclick="loadBookings()" style="cursor: pointer; color: #ff6b6b;"></i>
+                </span>
+            </h3>
             <div id="bookingsList">
-                <p style="color: #666;">No bookings yet. Check back soon!</p>
+                <p style="color: #666; text-align: center; padding: 20px;">
+                    <i class="fas fa-spinner fa-spin" style="color: #ff6b6b;"></i> Loading bookings...
+                </p>
             </div>
         </div>
 
-        <div style="margin-top: 30px; display: flex; gap: 10px; flex-wrap: wrap;">
-            <button onclick="sendAllReminders()" class="btn primary"><i class="fas fa-bell"></i> Send Reminders to All</button>
-            <button onclick="exportReport()" class="btn secondary"><i class="fas fa-file-export"></i> Export Report</button>
+        <!-- ===== ADMIN ACTIONS ===== -->
+        <div class="admin-actions">
+            <button onclick="sendAllReminders()" class="btn primary">
+                <i class="fas fa-bell"></i> Send Reminders
+            </button>
+            <button onclick="exportReport()" class="btn secondary">
+                <i class="fas fa-file-export"></i> Export Report
+            </button>
+            <button onclick="refreshData()" class="btn secondary">
+                <i class="fas fa-sync"></i> Refresh Data
+            </button>
+            <button onclick="window.location.href='app.html'" class="btn secondary">
+                <i class="fas fa-arrow-left"></i> Back to App
+            </button>
+        </div>
+
+        <div class="refresh-note">
+            <i class="fas fa-database"></i> Data syncs from Firebase automatically.
+            Last updated: <span id="lastUpdated">Just now</span>
         </div>
     </div>
 
-    <script>
-        // Simulated admin data
-        function updateDashboard() {
-            document.getElementById('bookingCount').textContent = '12';
-            document.getElementById('revenueTotal').textContent = 'N2,450,000';
-            document.getElementById('occupancyRate').textContent = '68%';
+    <!-- ===== FIREBASE SDK ===== -->
+    <script type="module">
+        // ============================================================
+        // FIREBASE CONFIG
+        // ============================================================
+
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-app.js";
+        import {
+            getFirestore,
+            collection,
+            getDocs,
+            query,
+            orderBy,
+            limit,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/11.0.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA4of4wK7hje6JRtQtDboZtCkeKmgfVaDE",
+            authDomain: "agbonna-638b5.firebaseapp.com",
+            projectId: "agbonna-638b5",
+            storageBucket: "agbonna-638b5.firebasestorage.app",
+            messagingSenderId: "584147461627",
+            appId: "1:584147461627:web:5a5a9f51024e0d14b8575e",
+            measurementId: "G-W246HC1HLJ"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        console.log("📍 CuteVenue Admin connected to Firebase!");
+
+        // ============================================================
+        // LOAD BOOKINGS FROM FIREBASE
+        // ============================================================
+
+        async function loadBookings() {
+            const listContainer = document.getElementById('bookingsList');
+            listContainer.innerHTML = `
+                <p style="color: #666; text-align: center; padding: 20px;">
+                    <i class="fas fa-spinner fa-spin" style="color: #ff6b6b;"></i> Loading bookings...
+                </p>
+            `;
+
+            try {
+                const bookingsRef = collection(db, "bookings");
+                const q = query(bookingsRef, orderBy("createdAt", "desc"), limit(20));
+                const querySnapshot = await getDocs(q);
+
+                const bookings = [];
+                querySnapshot.forEach((doc) => {
+                    bookings.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (bookings.length === 0) {
+                    listContainer.innerHTML = `
+                        <p style="color: #666; text-align: center; padding: 30px;">
+                            <i class="fas fa-inbox" style="color: #ff6b6b; font-size: 2rem; display: block; margin-bottom: 10px;"></i>
+                            No bookings yet. Check back soon!
+                        </p>
+                    `;
+                    return;
+                }
+
+                let html = `
+                    <table class="bookings-table">
+                        <thead>
+                            <tr>
+                                <th>Booking ID</th>
+                                <th>Event Hall</th>
+                                <th>Date</th>
+                                <th>Event</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                `;
+
+                bookings.forEach(b => {
+                    const statusClass = b.status || 'pending';
+                    const statusLabel = statusClass.charAt(0).toUpperCase() + statusClass.slice(1);
+                    const dateStr = b.date ? new Date(b.date).toDateString() : 'N/A';
+                    const totalStr = b.total ? `N${b.total.toLocaleString()}` : 'N0';
+
+                    html += `
+                        <tr>
+                            <td style="color: #ff6b6b; font-weight: 600;">#${b.id.slice(0, 8)}</td>
+                            <td>${b.venueName || 'Unknown'}</td>
+                            <td>${dateStr}</td>
+                            <td>${b.eventType || 'N/A'}</td>
+                            <td style="color: #ff6b6b;">${totalStr}</td>
+                            <td><span class="status-badge ${statusClass}">${statusLabel}</span></td>
+                        </tr>
+                    `;
+                });
+
+                html += `
+                        </tbody>
+                    </table>
+                `;
+
+                listContainer.innerHTML = html;
+
+                // Update stats
+                updateStats(bookings);
+
+                document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+
+            } catch (error) {
+                console.error("❌ Error loading bookings:", error);
+                listContainer.innerHTML = `
+                    <p style="color: #ff4444; text-align: center; padding: 20px;">
+                        <i class="fas fa-exclamation-triangle"></i> Error loading bookings. Please refresh.
+                    </p>
+                `;
+            }
         }
-        updateDashboard();
+
+        // ============================================================
+        // UPDATE STATS
+        // ============================================================
+
+        function updateStats(bookings) {
+            // Total bookings
+            document.getElementById('bookingCount').textContent = bookings.length;
+
+            // Total revenue
+            let totalRevenue = 0;
+            bookings.forEach(b => {
+                if (b.total && b.status === 'confirmed') {
+                    totalRevenue += b.total;
+                }
+            });
+            document.getElementById('revenueTotal').textContent = `N${totalRevenue.toLocaleString()}`;
+
+            // Occupancy rate (simulated)
+            const occupancy = bookings.length > 0 ? Math.min(Math.round((bookings.length / 20) * 100), 95) : 0;
+            document.getElementById('occupancyRate').textContent = `${occupancy}%`;
+
+            // Venue count
+            const venues = new Set(bookings.map(b => b.venueId));
+            document.getElementById('venueCount').textContent = venues.size || 0;
+        }
+
+        // ============================================================
+        // ADMIN FUNCTIONS
+        // ============================================================
 
         function sendAllReminders() {
-            alert('📧 Reminders sent to all upcoming bookings!');
+            const count = document.getElementById('bookingCount').textContent;
+            if (count === '0') {
+                alert('📧 No bookings to send reminders to.');
+                return;
+            }
+            alert(`📧 Reminders sent to ${count} upcoming bookings!`);
         }
 
         function exportReport() {
-            alert('📄 Report exported as CSV!');
+            const bookingsTable = document.querySelector('.bookings-table');
+            if (!bookingsTable) {
+                alert('📄 No data to export.');
+                return;
+            }
+            alert('📄 Report exported as CSV! (Integration with backend required)');
         }
+
+        function refreshData() {
+            document.getElementById('refreshIcon').classList.add('fa-spin');
+            loadBookings().then(() => {
+                document.getElementById('refreshIcon').classList.remove('fa-spin');
+            });
+        }
+
+        // ============================================================
+        // LIVE LISTENER (Real-time updates)
+        // ============================================================
+
+        function setupRealtimeListener() {
+            const bookingsRef = collection(db, "bookings");
+            const q = query(bookingsRef, orderBy("createdAt", "desc"), limit(20));
+
+            onSnapshot(q, (snapshot) => {
+                const bookings = [];
+                snapshot.forEach((doc) => {
+                    bookings.push({ id: doc.id, ...doc.data() });
+                });
+
+                if (bookings.length > 0) {
+                    // Update stats without re-rendering the whole table
+                    updateStats(bookings);
+                    document.getElementById('lastUpdated').textContent = new Date().toLocaleTimeString();
+                }
+            }, (error) => {
+                console.error("❌ Realtime listener error:", error);
+            });
+        }
+
+        // ============================================================
+        // INIT
+        // ============================================================
+
+        // Expose functions to global scope for onclick handlers
+        window.sendAllReminders = sendAllReminders;
+        window.exportReport = exportReport;
+        window.refreshData = refreshData;
+        window.loadBookings = loadBookings;
+
+        // Load bookings on page load
+        loadBookings();
+
+        // Setup realtime listener for live updates
+        setupRealtimeListener();
+
+        console.log("📍 CuteVenue Admin Dashboard loaded successfully!");
     </script>
+    <script type="module" src="script.js"></script>
+    
 </body>
 </html>
